@@ -26,8 +26,10 @@ def print_header
 end
 def print(students)
 # iteration over the students, this will print all the students' names
-students.each_with_index do |student, index|
+	students.each_with_index do |student, index|
+		if student[:name].capitalize!.start_with? ("S")
 	puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+	end
 end
 end
 
