@@ -7,13 +7,31 @@ def input_students
 	students = []
 	# get the first name
 	name = gets.chomp
+	puts "Please add a country of birth for the student"
+	birth_place = gets.chomp
+
+	puts "Please add the height of the student in cm"
+	height = gets.chomp
+
+	puts "Please add a hobbie for the student"
+	hobbie = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do 
 		# add the student has to the array
-		students << {name: name, cohort: :november}
+		students << {name: name, cohort: :november, country: birth_place, height: height, hobbie: hobbie}
 		puts "now we have #{students.count} students"
 		# get another name for the user
-		name =gets.chomp
+		puts "Please enter the next students' name or press enter to quite"
+		name = gets.chomp
+		break if name == ""
+		puts "Please add a country of birth for the student"
+		birth_place = gets.chomp
+
+		puts "Please add the height of the student in cm"
+		height = gets.chomp
+
+		puts "Please add a hobbie for the student"
+		hobbie = gets.chomp
 	end
 	students 
 end
@@ -21,16 +39,18 @@ end
 students = input_students
 
 def print_header
+	line_width = 50
 	puts "The students of Villains Academy"
 	puts "___________"
+	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbie").ljust(line_width/6)
 end
 def print(students)
 # iteration over the students, this will print all the students' names
-	students.each_with_index do |student, index|
-		if student[:name].length < 12 && student[:name].capitalize!.start_with?("S")
-	puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
-	end
-end
+		line_width = 50
+		students.each_with_index do |student, index|
+		
+	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
+		end
 end
 
 def print_footer(names)
@@ -38,4 +58,8 @@ def print_footer(names)
 puts "Overall, we have #{names.count} great students"
 end
 
+print_header
 print students
+print_footer students
+
+
