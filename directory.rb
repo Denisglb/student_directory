@@ -42,7 +42,7 @@ def print_header
 	line_width = 50
 	puts "The students of Villains Academy"
 	puts "___________"
-	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbie").ljust(line_width/6)
+	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
 end
 def print(students)
 # iteration over the students, this will print all the students' names
