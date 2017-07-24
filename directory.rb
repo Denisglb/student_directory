@@ -1,36 +1,42 @@
 #let's put all the students in an array
 
 def input_students
-	puts "Please enter the names of the students"
-	puts "To finish, just hit return twice"
+	puts "Please enter the names of the students".center(50)
+	puts "To finish, just hit return twice".center(50)
 	# create an empty array
 	students = []
 	# get the first name
 	name = gets.chomp
-	puts "Please add a country of birth for the student"
+	puts "Enter the cohort".center(50)
+	cohort = gets.gsub(/\n/,"")
+
+	puts "Please add a country of birth for the student".center(50)
 	birth_place = gets.chomp
 
-	puts "Please add the height of the student in cm"
+	puts "Please add the height of the student in cm".center(50)
 	height = gets.chomp
 
-	puts "Please add a hobbie for the student"
+	puts "Please add a hobbie for the student".center(50)
 	hobbie = gets.chomp
 	# while the name is not empty, repeat this code
 	while !name.empty? do 
+		if cohort == ""
+			cohort = :November
+		end
 		# add the student has to the array
-		students << {name: name, cohort: :november, country: birth_place, height: height, hobbie: hobbie}
-		puts "now we have #{students.count} students"
+		students << {name: name, cohort: cohort.to_sym, country: birth_place, height: height, hobbie: hobbie}
+		puts "now we have #{students.count} students".center(50)
 		# get another name for the user
-		puts "Please enter the next students' name or press enter to quite"
+		puts "Please enter the next students' name or press enter to quite".center(50)
 		name = gets.chomp
 		break if name == ""
-		puts "Please add a country of birth for the student"
+		puts "Please add a country of birth for the student".center(50)
 		birth_place = gets.chomp
 
-		puts "Please add the height of the student in cm"
+		puts "Please add the height of the student in cm".center(50)
 		height = gets.chomp
 
-		puts "Please add a hobbie for the student"
+		puts "Please add a hobbie for the student".center(50)
 		hobbie = gets.chomp
 	end
 	students 
@@ -48,7 +54,6 @@ def print(students)
 # iteration over the students, this will print all the students' names
 		line_width = 50
 		students.each_with_index do |student, index|
-		
 	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
 		end
 end
@@ -61,5 +66,3 @@ end
 print_header
 print students
 print_footer students
-
-
