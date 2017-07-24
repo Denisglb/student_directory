@@ -6,18 +6,20 @@ def input_students
 	# create an empty array
 	students = []
 	# get the first name
-	name = gets.chomp
+	# name = gets.chomp
+	name = gets.gsub(/\n/, "")
 	puts "Enter the cohort".center(50)
 	cohort = gets.gsub(/\n/,"")
 
 	puts "Please add a country of birth for the student".center(50)
-	birth_place = gets.chomp
-
+	# birth_place = gets.chomp
+	birth_place = gets.gsub(/\n/,"")
 	puts "Please add the height of the student in cm".center(50)
-	height = gets.chomp
-
+	# height = gets.chomp
+	height = gets.gsub(/\n/, "")
 	puts "Please add a hobbie for the student".center(50)
-	hobbie = gets.chomp
+	# hobbie = gets.chomp
+	hobbie = gets.gsub(/\n/, "")
 	# while the name is not empty, repeat this code
 	while !name.empty? do 
 		if cohort == ""
