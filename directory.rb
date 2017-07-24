@@ -30,6 +30,8 @@ def input_students
 		puts "Please enter the next students' name or press enter to quite".center(50)
 		name = gets.chomp
 		break if name == ""
+		puts "Enter the cohort".center(50)
+		cohort = gets.gsub(/\n/,"")
 		puts "Please add a country of birth for the student".center(50)
 		birth_place = gets.chomp
 
@@ -54,8 +56,12 @@ def print(students)
 # iteration over the students, this will print all the students' names
 		line_width = 50
 		students.each_with_index do |student, index|
-	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
+			cohort_of_your_choice = :November
+			if student[:cohort] == cohort_of_your_choice
+				puts ("#{student[:name]}").ljust(line_width/6) + ("#{student[:cohort]}").ljust(line_width*2/6)
+	# puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
 		end
+	end
 end
 
 def print_footer(names)
