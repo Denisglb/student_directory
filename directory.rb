@@ -25,7 +25,11 @@ def input_students
 		end
 		# add the student has to the array
 		students << {name: name, cohort: cohort.to_sym, country: birth_place, height: height, hobbie: hobbie}
-		puts "now we have #{students.count} students".center(50)
+		if students.count == 1
+			puts "now we have #{students.count} student".center(50)
+		else 
+			puts "now we have #{students.count} students".center(50)
+		end
 		# get another name for the user
 		puts "Please enter the next students' name or press enter to quite".center(50)
 		name = gets.chomp
