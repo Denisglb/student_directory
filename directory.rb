@@ -32,11 +32,11 @@ def input_students
 			cohort = :November
 		end
 		# add the student has to the array
-		students << {name: name, cohort: cohort.to_sym, country: birth_place, height: height, hobbie: hobbie}
-		if students.count == 1
-			puts "now we have #{students.count} student".center(50)
+		@students << {name: name, cohort: cohort.to_sym, country: birth_place, height: height, hobbie: hobbie}
+		if @students.count == 1
+			puts "now we have #{@students.count} student".center(50)
 		else 
-			puts "now we have #{students.count} students".center(50)
+			puts "now we have #{@students.count} students".center(50)
 		end
 		# get another name for the user
 		puts "Please enter the next students' name or press enter to quite".center(50)
@@ -53,7 +53,7 @@ def input_students
 		puts "Please add a hobbie for the student".center(50)
 		hobbie = gets.chomp
 	end
-	students 
+	@students 
 end
 
 def print_header
@@ -63,44 +63,49 @@ def print_header
 	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
 end
 
-def print_students_list(students)
+def print_students_list
 # iteration over the students, this will print all the students' names
-		if students.count <= 0 
+		if @students.count <= 0 
 			return
 		end
 		line_width = 50
-		students.each_with_index do |student, index|
-			cohort_of_your_choice = :November
-			if student[:cohort] == cohort_of_your_choice
-				puts ("#{student[:name]}").ljust(line_width/6) + ("#{student[:cohort]}").ljust(line_width*2/6)
+		@students.each_with_index do |student, index|
 	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
 		end
-	end
 end
 
-def print_footer(names)
+def print_footer
 # finally, we print the total number of students
-puts "Overall, we have #{names.count} great students"
+if @students.count <= 0
+	return
+end
+
+if @students.count == 1 
+	puts "Overall, we have one great student! The rest are imaginary"
+else
+puts "Overall, we have #{@students.count} great students"
+end
 end
 
 def interactive_menu
 	# declared the variable students before the loop setting it to an empty array. Done so that it will be availble in several iterations of the loop. 
 	loop do 
-	print_menu
-	process(gets.chomp)
+		print_menu
+		process(gets.chomp)
 	end
 end
 
 def print_menu
 	puts "1. Input the students"
 	puts "2. Show the students"
+	puts "3. Save the list of students.csv"
 	puts "9. Exit"
 end
 
 def show_students
 	print_header
-	print_students_list (students)
-	print_footer (students)
+	print_students_list
+	print_footer
 end
 
 def process (selection)
@@ -109,11 +114,28 @@ def process (selection)
 			input_students
 		when "2"
 			show_students
+		when "3"
+			save_students
 		when "9"
 			exit
 		else 
 			puts "I dont know what you mean, try again"
 	end
 end
+
+def save_students
+	# open the file for writing
+	file = File.open("students.csv", "w")
+	# open method returns us a  reference to the file that we can save it a variable.
+	# iterate over the array of students
+	@students.each do |student|
+		student_data = [student[:name], student[:cohort], student[:country], student [:height], student [:hobbie]]
+		csv_line = student_data.join(",")
+		file.puts csv_line
+	end
+	file.close
+	# every time a file is opened it needs to be closed
+end
+
 
 interactive_menu
