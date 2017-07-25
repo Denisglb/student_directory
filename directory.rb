@@ -64,12 +64,15 @@ def print_header
 end
 def print(students)
 # iteration over the students, this will print all the students' names
+		if students.count <= 0 
+			return
+		end
 		line_width = 50
 		students.each_with_index do |student, index|
 			cohort_of_your_choice = :November
 			if student[:cohort] == cohort_of_your_choice
 				puts ("#{student[:name]}").ljust(line_width/6) + ("#{student[:cohort]}").ljust(line_width*2/6)
-	# puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
+	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
 		end
 	end
 end
