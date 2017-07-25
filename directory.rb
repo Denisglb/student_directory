@@ -1,5 +1,7 @@
 #let's put all the students in an array
-
+@students = [] 
+# We need to access the variable students across numerous variables. 
+# an empty array accessible to all methods
 def input_students
 	puts "Please enter the names of the students".center(50)
 	puts "To finish, just hit return twice".center(50)
@@ -61,7 +63,7 @@ def print_header
 	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
 end
 
-def print(students)
+def print_students_list(students)
 # iteration over the students, this will print all the students' names
 		if students.count <= 0 
 			return
@@ -82,30 +84,35 @@ puts "Overall, we have #{names.count} great students"
 end
 
 def interactive_menu
-	students = []
 	# declared the variable students before the loop setting it to an empty array. Done so that it will be availble in several iterations of the loop. 
 	loop do 
-		# 1. print the menu and ask the user what to do
-		puts '1. Input the students'
-		puts "2. Show the stuedents"
-		puts "9. Exit" 
+	print_menu
+	process(gets.chomp)
+	end
+end
 
-		selection = gets.chomp
-		# read the input and save it to selection
+def print_menu
+	puts "1. Input the students"
+	puts "2. Show the students"
+	puts "9. Exit"
+end
 
-		case selection
+def show_students
+	print_header
+	print_students_list (students)
+	print_footer (students)
+end
+
+def process (selection)
+	case selection
 		when "1"
-			students = input_students
+			input_students
 		when "2"
-			print_header
-			print students
-			print_footer students
+			show_students
 		when "9"
-			exit 
-			# This will cause the programme to terminate
-		else
-			puts "I don't know what you mean, try again"
-		end
+			exit
+		else 
+			puts "I dont know what you mean, try again"
 	end
 end
 
