@@ -54,14 +54,13 @@ def input_students
 	students 
 end
 
-students = input_students
-
 def print_header
 	line_width = 50
 	puts "The students of Villains Academy"
 	puts "___________"
 	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
 end
+
 def print(students)
 # iteration over the students, this will print all the students' names
 		if students.count <= 0 
@@ -82,6 +81,32 @@ def print_footer(names)
 puts "Overall, we have #{names.count} great students"
 end
 
-print_header
-print students
-print_footer students
+def interactive_menu
+	students = []
+	# declared the variable students before the loop setting it to an empty array. Done so that it will be availble in several iterations of the loop. 
+	loop do 
+		# 1. print the menu and ask the user what to do
+		puts '1. Input the students'
+		puts "2. Show the stuedents"
+		puts "9. Exit" 
+
+		selection = gets.chomp
+		# read the input and save it to selection
+
+		case selection
+		when "1"
+			students = input_students
+		when "2"
+			print_header
+			print students
+			print_footer students
+		when "9"
+			exit 
+			# This will cause the programme to terminate
+		else
+			puts "I don't know what you mean, try again"
+		end
+	end
+end
+
+interactive_menu
