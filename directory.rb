@@ -2,89 +2,9 @@
 @students = [] 
 # We need to access the variable students across numerous variables. 
 # an empty array accessible to all methods
-def input_students
-	puts "Please enter the names of the students".center(50)
-	puts "To finish, just hit return twice".center(50)
-	# create an empty array
-	students = []
-	# get the first name
-	# name = gets.chomp
-	name = STDIN.gets.chomp
-	
-	puts "Enter the cohort".center(50)
-	cohort = STDIN.gets.chomp
 
-	puts "Please add a country of birth for the student".center(50)
-	# birth_place = gets.chomp
-	birth_place = STDIN.gets.chomp
-	
-	puts "Please add the height of the student in cm".center(50)
-	# height = gets.chomp
-	height = STDIN.gets.chomp
-	
-	puts "Please add a hobbie for the student".center(50)
-	# hobbie = gets.chomp
-	hobbie = STDIN.gets.chomp
-	
-	# while the name is not empty, repeat this code
-	while !name.empty? do 
-		if cohort == ""
-			cohort = :November
-		end
-		# add the student has to the array
-		@students << {name: name, cohort: cohort.to_sym, country: birth_place, height: height, hobbie: hobbie}
-		if @students.count == 1
-			puts "now we have #{@students.count} student".center(50)
-		else 
-			puts "now we have #{@students.count} students".center(50)
-		end
-		# get another name for the user
-		puts "Please enter the next students' name or press enter to quite".center(50)
-		name = STDIN.gets.chomp
-		break if name == ""
-		puts "Enter the cohort".center(50)
-		cohort = STDIN.gets.chomp
-		puts "Please add a country of birth for the student".center(50)
-		birth_place = STDIN.gets.chomp
-
-		puts "Please add the height of the student in cm".center(50)
-		height = STDIN.gets.chomp
-
-		puts "Please add a hobbie for the student".center(50)
-		hobbie = STDIN.gets.chomp
-	end
-	@students 
-end
-
-def print_header
-	line_width = 50
-	puts "The students of Villains Academy"
-	puts "___________"
-	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
-end
-
-def print_students_list
-# iteration over the students, this will print all the students' names
-		if @students.count <= 0 
-			return
-		end
-		line_width = 50
-		@students.each_with_index do |student, index|
-	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
-		end
-end
-
-def print_footer
-# finally, we print the total number of students
-if @students.count <= 0
-	return
-end
-
-if @students.count == 1 
-	puts "Overall, we have one great student! The rest are imaginary"
-else
-puts "Overall, we have #{@students.count} great students"
-end
+def add_students(name, cohort, country, height, hobbie)
+	@students << {name: name, cohort: cohort.to_sym, country: country.to_sym, height: height.to_sym, hobbie: hobbie.to_sym }
 end
 
 def interactive_menu
@@ -144,7 +64,7 @@ def load_students(filename = "students.csv")
 	file = File.open(filename,"r")
 	file.readlines.each do |line|
 		name, cohort, country, height, hobbie = line.chomp.split(',')
-		@students << {name: name, cohort: cohort.to_sym, birth_place: country.to_sym, height: height.to_sym, hobbie: hobbie.to_sym}
+		add_students(name, cohort, country, height, hobbie)
 	end
 	file.close
 end
@@ -160,5 +80,91 @@ def try_load_students
 		exit #quit the program
 	end
 end
+
+def input_students
+	puts "Please enter the names of the students".center(50)
+	puts "To finish, just hit return twice".center(50)
+	# create an empty array
+	students = []
+	# get the first name
+	# name = gets.chomp
+	name = STDIN.gets.chomp
+	
+	puts "Enter the cohort".center(50)
+	cohort = STDIN.gets.chomp
+
+	puts "Please add a country of birth for the student".center(50)
+	# birth_place = gets.chomp
+	country = STDIN.gets.chomp
+	
+	puts "Please add the height of the student in cm".center(50)
+	# height = gets.chomp
+	height = STDIN.gets.chomp
+	
+	puts "Please add a hobbie for the student".center(50)
+	# hobbie = gets.chomp
+	hobbie = STDIN.gets.chomp
+	
+	# while the name is not empty, repeat this code
+	while !name.empty? do 
+		if cohort == ""
+			cohort = :November
+		end
+		# add the student has to the array
+		add_students(name, cohort, country, height, hobbie)
+		if @students.count == 1
+			puts "now we have #{@students.count} student".center(50)
+		else 
+			puts "now we have #{@students.count} students".center(50)
+		end
+		# get another name for the user
+		puts "Please enter the next students' name or press enter to quite".center(50)
+		name = STDIN.gets.chomp
+		break if name == ""
+		puts "Enter the cohort".center(50)
+		cohort = STDIN.gets.chomp
+		puts "Please add a country of birth for the student".center(50)
+		country = STDIN.gets.chomp
+
+		puts "Please add the height of the student in cm".center(50)
+		height = STDIN.gets.chomp
+
+		puts "Please add a hobbie for the student".center(50)
+		hobbie = STDIN.gets.chomp
+	end
+	@students 
+end
+
+def print_header
+	line_width = 50
+	puts "The students of Villains Academy"
+	puts "___________"
+	puts ("Index").ljust(line_width/6) + ("Name").ljust(line_width*2/6) + ("Cohort").ljust(line_width/2) + ("Country of Origin").ljust(line_width*4/6) + ("Height (cm)").ljust(line_width*5/6) + ("Favourite Hobbies").ljust(line_width/6)
+end
+
+def print_students_list
+# iteration over the students, this will print all the students' names
+		if @students.count <= 0 
+			return
+		end
+		line_width = 50
+		@students.each_with_index do |student, index|
+	puts ("#{index+1}.").ljust(line_width/6) + ("#{student[:name]}").ljust(line_width*2/6) + ("#{student[:cohort]}").ljust(line_width/2) + ("#{student[:country]}").ljust(line_width*4/6) + ("#{student[:height]}cm").ljust(line_width*5/6) + ("#{student[:hobbie]}").ljust(line_width/6)
+		end
+end
+
+def print_footer
+# finally, we print the total number of students
+if @students.count <= 0
+	return
+end
+
+if @students.count == 1 
+	puts "Overall, we have one great student! The rest are imaginary"
+else
+puts "Overall, we have #{@students.count} great students"
+end
+end
+
 
 interactive_menu
